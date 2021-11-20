@@ -32,4 +32,8 @@ export class Deck {
         }
         return this.cards;
     }
+
+    pickOneCard() {
+        return this.cards.pop();
+    }
 }

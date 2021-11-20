@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@100;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <section id="blackJack">
         <header>
             <h1>BlackJack</h1>
         </header>
-        <div id="message"></div>
+        <div id="message">
+            <p id='msg-text'></p>
+            <button>hhhhhh</button>
+        </div>
         <div id="table">
             <h2>Twoje karty</h2>
             <div id="playersCards"></div>
@@ -24,10 +29,11 @@
             Punkty krupiera <div id="dealerPoints"></div>
         </div>
         <div id="buttons">
-            <button id="hit">Dobierz karty</button>
-            <button id="stand">Zostaję</button>
+            <button class="pointer" id="hit">Dobierz karty</button>
+            <button class="pointer" id="stand">Zostaję</button>
         </div>
     </section>
     <script src="app/Game.js" type="module"></script>
 </body>
+
 </html>
