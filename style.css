@@ -38,10 +38,10 @@ h2 {
 #table {
 	position: relative;
 	background-color: green;
-	padding: 100px;
-	border-radius: 100px;
+	padding: 0 20px;
+	border-radius: 30px;
 	border: 3px black solid;
-	margin: 50px 0px;
+	margin: 10px 0px;
 }
 
 #playersCards, #dealersCards {
@@ -92,18 +92,27 @@ h2 {
 }
 
 
-#buttons button {
+.pointer {
 	padding: 10px 30px;
 	border-radius: 30px;
-	background: #000;
-	color: #fff;
 	margin: 0 50px;
+	border-color: black;
+	background-color: #000;
+	color: #fff;
 }
 
 .pointer:hover {
 	cursor: pointer;
+	background-color: #fff;
+	color: black;
 }
 
 .pointer-hide:hover {
 	cursor: auto;
+	background-color: #000;
+	color: #fff;
+}
+
+.dark {
+	background-color: rgba(0, 0, 0, .5);
 }

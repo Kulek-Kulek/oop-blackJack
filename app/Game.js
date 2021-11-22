@@ -5,7 +5,7 @@ import { UI } from './UI.js';
 import { Message } from './Message.js';
 
 class Game {
-    constructor({ player, table, hitButton, standButton, playerPoints, dealerPoints, messageBox }) {
+    constructor({ player, table, hitButton, standButton, playerPoints, dealerPoints, messageBox, messageText, section, playAgainButton }) {
         this.player = player;
         this.dealer = new Player('Croupier')
         this.table = table;
@@ -13,14 +13,18 @@ class Game {
         this.deck.shuffle();
         this.hitButton = hitButton;
         this.standButton = standButton;
+        this.playAgainButton = playAgainButton;
         this.playerPoints = playerPoints;
         this.dealerPoints = dealerPoints;
         this.messageBox = messageBox;
+        this.messageText = messageText;
+        this.section = section;
     }
 
     run() {
         this.hitButton.addEventListener('click', e => this.hitCrad());
         this.standButton.addEventListener('click', e => this.dealerPlays());
+        this.playAgainButton.addEventListener('click', () => location.reload());
         this.dealCards();
     }
 
@@ -69,11 +73,33 @@ class Game {
         this.hitButton.classList.add('pointer-hide');
         this.standButton.classList.add('pointer-hide');
 
-        if (this.dealer.points < 21 && this.dealer.points === this.player.points) return this.messageBox.setText('REMIS').show();
+        if (this.dealer.points < 21 && this.dealer.points === this.player.points) {
+            this.messageText.setText('REMIS');
+            this.messageBox.show();
+            this.section.classList.add('dark');
+            return;
+        }
 
-        if (this.player.points > 21) return this.messageBox.setText('Wygrywa Krupier').show();
-        if (this.dealer.points > 21) return this.messageBox.setText('Gratulacje - wygrywasz!').show();
-        if (this.player.points < this.dealer.points) return this.messageBox.setText('Wygrywa Krupier').show();
+        if (this.player.points > 21) {
+            this.messageText.setText('Wygrywa Krupier');
+            this.messageBox.show();
+            this.section.classList.add('dark');
+            return;
+        }
+
+        if (this.dealer.points > 21) {
+            this.messageText.setText('Gratulacje - wygrywasz!');
+            this.messageBox.show();
+            this.section.classList.add('dark');
+            return
+        }
+
+        if (this.player.points < this.dealer.points) {
+            this.messageText.setText('Wygrywa Krupier');
+            this.messageBox.show();
+            this.section.classList.add('dark');
+            return
+        }
     }
 }
 
@@ -89,9 +115,12 @@ const game = new Game({
     table,
     hitButton: ui.getElement('#hit'),
     standButton: ui.getElement('#stand'),
+    playAgainButton: ui.getElement('#message__btn'),
     dealerPoints: ui.getElement('#dealerPoints'),
     playerPoints: ui.getElement('#playerPoints'),
-    messageBox: new Message(ui.getElement('#message'))
+    messageBox: new Message(ui.getElement('#message')),
+    messageText: new Message(ui.getElement('#message__text')),
+    section: ui.getElement('body')
 });
 
 game.run();
